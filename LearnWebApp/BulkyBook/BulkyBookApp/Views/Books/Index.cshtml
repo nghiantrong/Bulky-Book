@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BulkyBookApp.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string HasImage(Book book)
+    {
+        if (book.ImageUrl != "" && book.ImageUrl != null)
+        {
+            return "bi bi-check2";
+        }
+        else
+        {
+            return "bi bi-x";
+        }
+    }
+}
+
+<h1>Books</h1>
+
+<div class="col-12 text-end">
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-square"></i> Add New Book</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePublished)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Has Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <i class="@HasImage(item)"></i>
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

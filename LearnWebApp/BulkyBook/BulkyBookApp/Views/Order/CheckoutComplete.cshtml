@@ -1,0 +1,46 @@
+﻿@model BulkyBookApp.Models.Order
+
+<h1>Thank you for your order</h1>
+
+<h5 class="mt-5">Order Id: @Model.Id</h5>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Book</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                var itemTotal = item.Book.Price * item.Quantity;
+                <tr>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id"> </a>
+                        <img src="@item.Book.ImageUrl" style="height: 4em">
+                    </td>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id"> </a>
+                        @item.Book.Title
+                    </td>
+                    <td>
+                        $@itemTotal.ToString(".00")
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+        <td></td>
+        <td class="text-right">
+            <strong>Total: </strong>
+        </td>
+        <td>
+            <strong>$@Model.OrderTotal.ToString(".00")</strong>
+        </td>
+        <td></td>
+        </tfoot>
+    </table>

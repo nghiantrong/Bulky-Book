@@ -1,0 +1,66 @@
+﻿@model BulkyBookApp.Models.Cart
+
+<h1>Cart</h1>
+
+@if (Model.CartItems.Count > 0)
+{
+     <table class="table">
+         <tr>
+             <th></th>
+             <th>Book</th>
+             <th>Price</th>
+             <th>Quantity</th>
+             <th>Remove</th>
+         </tr>
+         <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                var bookTotal = item.Book.Price * item.Quantity;
+                <tr>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id"> </a>
+                        <img src="@item.Book.ImageUrl" style="height: 4em">
+                    </td>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id"> </a>
+                        @item.Book.Title
+                    </td>
+                    <td>
+                        $@bookTotal.ToString(".00")
+                    </td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Book.Id"><i class="bi bi-dash-lg"></i></a>
+                        <span class="">@item.Quantity</span>
+                        <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Book.Id"><i class="bi bi-plus-lg"></i></a>
+                    </td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Book.Id" class="text-danger "><i class="bi bi-trash2-fill"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <td></td>
+            <td class="text-right">
+                <strong>Total: </strong>
+            </td>
+            <td>
+                <strong>$@Model.GetCartTotal().ToString(".00")</strong>
+            </td>
+            <td></td>
+            <td></td>
+        </tfoot>
+     </table>
+     
+     <a class="a-cleanup" asp-action="Checkout" asp-controller="Order">
+        <div class="btn btn-success float-right mr-5">Checkout <i class="bi bi-arrow-right-square"></i></div>
+     </a>
+     <a class="a-cleanup" asp-action="ClearCart" asp-controller="Cart">
+        <div class="btn btn-danger float-right mr-5"><i class="bi bi-trash"></i> Empty Cart</div>
+     </a>
+}
+else
+{
+    <h3 class="text-center">Cart is Empty</h3>
+}

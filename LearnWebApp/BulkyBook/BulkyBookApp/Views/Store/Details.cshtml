@@ -1,0 +1,67 @@
+﻿@model BulkyBookApp.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<div class="row">
+    <div class="col-8">
+        <div>
+            <h4>Book</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Language)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Language)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ISBN)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.DatePublished)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DatePublished)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Index">Back to Store</a>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-primary store-btn m-5"><i class="bi bi-basket"></i> Add to cart</a>
+        </div>
+    </div>
+    <div class="col-4">
+        <img src="@Model.ImageUrl" class="w-100" />
+    </div>
+</div>
